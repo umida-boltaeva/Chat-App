@@ -7,8 +7,6 @@ import LoginComponent from "./login/login";
 import SignupComponent from "./signup/signup";
 import DashboardComponent from "./dashboard/dashboard";
 
-
-
 const firebase = require("firebase");
 require("firebase/firestore");
 
@@ -32,14 +30,6 @@ const routing = (
     </div>
   </Router>
 )
-
-
-
-
-
-
-
-
 
 
 ReactDOM.render( 
