@@ -15,14 +15,14 @@ const styles = theme => ({
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
-      padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme.spacing.unit * 3}px`,
+      padding: `${theme.spacing(2)}px ${theme.spacing(3)}px ${theme.spacing(3)}px`,
     },
     form: {
       width: '100%',
-      marginTop: theme.spacing.unit,
+      marginTop: theme.spacing(1),
     },
     submit: {
-      marginTop: theme.spacing.unit * 3,
+      marginTop: theme.spacing(3),
     },
     hasAccountHeader: {
       width: '100%'
