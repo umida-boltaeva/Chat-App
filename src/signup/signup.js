@@ -8,6 +8,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import styles from "./styles"
+import { Form } from "reactstrap";
 const firebase = require("firebase");
 
 class SignupComponent extends React.Component {
@@ -23,9 +24,27 @@ class SignupComponent extends React.Component {
                     <Typography component="h1" variant="h5">
                         Sign Up!
                     </Typography>
+                    <form onSubmit={(e) => this.submitSignup(e)} className={classes.form}>
+                        <FormControl required fullWidth margin="normal">
+                            <InputLabel htmlFor="signup-email-input">Enter Your Email</InputLabel>
+                                <Input autoComplete="email" 
+                                       onChange={(e) => this.userTyping("type", e)} 
+                                       autoFocus 
+                                       id="signup-email-input">
+                                </Input> 
+                        </FormControl>
+                    </form>
                 </Paper>
             </main>
         )
+    };
+
+    userTyping = (type, e) => {
+        console.log(type, e);
+    }
+
+    submitSignup = e => {
+        console.log("submitting!");
     }
 }
 
