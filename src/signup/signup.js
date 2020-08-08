@@ -27,12 +27,33 @@ class SignupComponent extends React.Component {
                     <form onSubmit={(e) => this.submitSignup(e)} className={classes.form}>
                         <FormControl required fullWidth margin="normal">
                             <InputLabel htmlFor="signup-email-input">Enter Your Email</InputLabel>
-                                <Input autoComplete="email" 
-                                       onChange={(e) => this.userTyping("type", e)} 
-                                       autoFocus 
-                                       id="signup-email-input">
-                                </Input> 
+                            <Input autoComplete="email" 
+                                onChange={(e) => this.userTyping("type", e)} 
+                                autoFocus 
+                                id="signup-email-input">
+                            </Input> 
                         </FormControl>
+
+                        <FormControl required fullWidth margin="normal">
+                            <InputLabel htmlFor="signup-password-input">Create A Password</InputLabel>
+                            <Input type="password"
+                                   onChange={(e) => this.userTyping("password", e)}
+                                   id="signup-password-input">   
+                            </Input>
+                        </FormControl>
+
+                        <FormControl required fullWidth margin="normal">
+                            <InputLabel htmlFor="signup-password-confirmation-input">Confirm Your Password</InputLabel>
+                            <Input type="password"
+                                   onChange={(e) => this.userTyping("passwordConfirmation", e)}
+                                   id="signup-password-confirmation-input">   
+                            </Input>
+                        </FormControl>
+                        <Button type="submit"
+                                fullWidth
+                                variant="contained"
+                                color="primary"
+                                className={classes.submit}>Submit</Button>
                     </form>
                 </Paper>
             </main>
