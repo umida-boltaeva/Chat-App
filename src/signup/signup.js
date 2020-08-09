@@ -9,6 +9,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import styles from "./styles"
+
 const firebase = require("firebase");
 
 class SignupComponent extends React.Component {
@@ -96,13 +97,42 @@ class SignupComponent extends React.Component {
             default:
                 break;
         }
-    }
+    };
 
     submitSignup = e => {
         e.preventDefault();
+
         if(!this.formIsValid()) {
             this.setState({signupError: "Passwords do not match!"})
+            return;
         }
+
+        firebase
+        .auth()
+        .createUserWithEmailAndPassword(this.state.email, this.state.password)
+        .then(authRes => {
+            const userObj = {
+                email: authRes.user.email
+            };
+            
+            firebase
+                .firestore()
+                .collection("users")
+                .doc(this.state.email)
+                .set(userObj)
+                .then(() => {
+                    console.log("success");
+                    this.props.history.push("/dashboard");
+                })
+                .catch(dbError => {
+                    console.log(dbError);
+                    this.setState({ signupError: "Failed to add user!" });
+                });
+
+        }, authError => {
+            console.log(authError);
+            this.setState({ signupError: "Failed to authenticate!" });
+        })
     }
 }
 
