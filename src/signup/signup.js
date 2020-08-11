@@ -59,6 +59,7 @@ class SignupComponent extends React.Component {
           this.setState({ signupError: "Failed to authenticate!" });
         }
       );
+
   };
 
   render() {
@@ -79,6 +80,7 @@ class SignupComponent extends React.Component {
               <Input
                 autoComplete="email"
                 onChange={(e) => this.userTyping("email", e)}
+
                 autoFocus
                 id="signup-email-input"
               ></Input>
