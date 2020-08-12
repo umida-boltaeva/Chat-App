@@ -9,16 +9,74 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import styles from "./styles";
-import { Form } from "reactstrap";
-const firebase = require("firebase");
+import firebase from "../firebase";
 
 class SignupComponent extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      email: null,
+      password: null,
+      passwordConfirmation: null,
+      signupError: "",
+    };
+  }
+
+  formIsValid = () => this.state.password === this.state.passwordConfirmation;
+
   userTyping = (type, e) => {
-    console.log(type, e);
+    switch (type) {
+      case "email":
+        this.setState({ email: e.target.value });
+        break;
+      case "password":
+        this.setState({ password: e.target.value });
+        break;
+      case "passwordConfirmation":
+        this.setState({ passwordConfirmation: e.target.value });
+        break;
+
+      default:
+        break;
+    }
   };
 
   submitSignup = (e) => {
-    console.log("submitting!");
+    e.preventDefault();
+
+    if (!this.formIsValid()) {
+      this.setState({ signupError: "Passwords do not match!" });
+      return;
+    }
+
+    firebase
+      .auth()
+      .createUserWithEmailAndPassword(this.state.email, this.state.password)
+      .then(
+        (authRes) => {
+          const userObj = {
+            email: authRes.user.email,
+          };
+
+          firebase
+            .firestore()
+            .collection("users")
+            .doc(this.state.email)
+            .set(userObj)
+            .then(() => {
+              console.log("success");
+              this.props.history.push("/dashboard");
+            })
+            .catch((dbError) => {
+              console.log(dbError);
+              this.setState({ signupError: "Failed to add user!" });
+            });
+        },
+        (authError) => {
+          console.log(authError);
+          this.setState({ signupError: "Failed to authenticate!" });
+        }
+      );
   };
 
   render() {
@@ -38,7 +96,7 @@ class SignupComponent extends React.Component {
               </InputLabel>
               <Input
                 autoComplete="email"
-                onChange={(e) => this.userTyping("type", e)}
+                onChange={(e) => this.userTyping("email", e)}
                 autoFocus
                 id="signup-email-input"
               ></Input>
@@ -75,6 +133,14 @@ class SignupComponent extends React.Component {
               Submit
             </Button>
           </form>
+          {this.state.signupError && (
+            <Typography
+              className={classes.errorText}
+              component="h5"
+              variant="h6"
+            ></Typography>
+          )}
+
           <Typography
             component="h5"
             variant="h6"
