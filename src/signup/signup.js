@@ -9,8 +9,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import styles from "./styles";
-
-const firebase = require("firebase");
+import firebase from "../firebase";
 
 class SignupComponent extends React.Component {
   constructor() {
@@ -22,6 +21,25 @@ class SignupComponent extends React.Component {
       signupError: "",
     };
   }
+
+  formIsValid = () => this.state.password === this.state.passwordConfirmation;
+
+  userTyping = (type, e) => {
+    switch (type) {
+      case "email":
+        this.setState({ email: e.target.value });
+        break;
+      case "password":
+        this.setState({ password: e.target.value });
+        break;
+      case "passwordConfirmation":
+        this.setState({ passwordConfirmation: e.target.value });
+        break;
+
+      default:
+        break;
+    }
+  };
 
   submitSignup = (e) => {
     e.preventDefault();
@@ -59,7 +77,6 @@ class SignupComponent extends React.Component {
           this.setState({ signupError: "Failed to authenticate!" });
         }
       );
-
   };
 
   render() {
@@ -80,7 +97,6 @@ class SignupComponent extends React.Component {
               <Input
                 autoComplete="email"
                 onChange={(e) => this.userTyping("email", e)}
-
                 autoFocus
                 id="signup-email-input"
               ></Input>
@@ -117,15 +133,13 @@ class SignupComponent extends React.Component {
               Submit
             </Button>
           </form>
-          {this.state.signupError ? (
+          {this.state.signupError && (
             <Typography
               className={classes.errorText}
               component="h5"
               variant="h6"
-            >
-              {this.state.signupError}
-            </Typography>
-          ) : null}
+            ></Typography>
+          )}
 
           <Typography
             component="h5"
@@ -141,25 +155,6 @@ class SignupComponent extends React.Component {
       </main>
     );
   }
-
-  formIsValid = () => this.state.password === this.state.passwordConfirmation;
-
-  userTyping = (type, e) => {
-    switch (type) {
-      case "email":
-        this.setState({ email: e.target.value });
-        break;
-      case "password":
-        this.setState({ password: e.target.value });
-        break;
-      case "passwordConfirmation":
-        this.setState({ passwordConfirmation: e.target.value });
-        break;
-
-      default:
-        break;
-    }
-  };
 }
 
 export default withStyles(styles)(SignupComponent);
