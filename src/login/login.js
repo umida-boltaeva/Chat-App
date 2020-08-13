@@ -11,12 +11,32 @@ import Button from "@material-ui/core/Button";
 import styles from "./styles";
 
 class LoginComponent extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      email: null,
+      password: null,
+      loginError: "",
+    };
+  }
+
   userTyping = (type, e) => {
-    console.log(type, e);
+    switch (type) {
+      case "email":
+        this.setState({ email: e.target.value });
+        break;
+      case "password":
+        this.setState({ password: e.target.value });
+        break;
+
+      default:
+        break;
+    }
   };
 
   submitLogin = (e) => {
-    console.log("SUBMITTING!");
+    e.preventDefault();
+    console.log("SUBMITTING!", this.state);
   };
 
   render() {
@@ -63,6 +83,16 @@ class LoginComponent extends React.Component {
               Log In
             </Button>
           </form>
+
+          {this.state.loginError && (
+            <Typography
+              className={classes.errorText}
+              component="h5"
+              variant="h6"
+            >
+              Incorrect Login Information
+            </Typography>
+          )}
           <Typography
             component="h5"
             variant="h6"
