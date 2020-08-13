@@ -9,6 +9,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import styles from "./styles";
+import firebase from "../firebase";
 
 class LoginComponent extends React.Component {
   constructor() {
@@ -36,7 +37,19 @@ class LoginComponent extends React.Component {
 
   submitLogin = (e) => {
     e.preventDefault();
-    console.log("SUBMITTING!", this.state);
+
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(this.state.email, this.state.password)
+      .then(
+        () => {
+          this.props.history.push("/dashboard");
+        },
+        (err) => {
+          this.setState({ loginError: "Server error!" });
+          console.log(err);
+        }
+      );
   };
 
   render() {
