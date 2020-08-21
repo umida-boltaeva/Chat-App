@@ -40,9 +40,9 @@ class ChatListComponent extends React.Component {
               return (
                 <div key={_index}>
                   <ListItem
-                    onclick={() => this.selectChat(_index)}
+                    onClick={() => this.selectChat(_index)}
                     className={classes.listItem}
-                    selected={this.prop.selectedChatIndex === _index}
+                    selected={this.props.selectedChatIndex === _index}
                     alignItems="flex-start"
                   >
                     <ListItemAvatar>
@@ -67,7 +67,7 @@ class ChatListComponent extends React.Component {
                           <Typography component="span" color="textPrimary">
                             {_chat.messages[
                               _chat.messages.length - 1
-                            ].message.subString(0, 30)}
+                            ].message.substring(0, 28)}
                           </Typography>
                         </React.Fragment>
                       }
