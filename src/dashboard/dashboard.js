@@ -17,7 +17,6 @@ class DashboardComponent extends React.Component {
   }
 
   selectChat = (chatIndex) => {
-    console.log("index:", chatIndex);
     this.setState({ selectedChat: chatIndex });
   };
 
