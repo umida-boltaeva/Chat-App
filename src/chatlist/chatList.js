@@ -21,9 +21,9 @@ class ChatListComponent extends React.Component {
     console.log("select chat", index);
   };
   render() {
-    const { classes } = this.props;
+    const { classes, chats } = this.props;
 
-    if (this.props.chats.length > 0) {
+    if (chats.length) {
       return (
         <main className={classes.root}>
           <Button
@@ -36,7 +36,7 @@ class ChatListComponent extends React.Component {
             New Message
           </Button>
           <List>
-            {this.props.chats.map((_chat, _index) => {
+            {chats.map((_chat, _index) => {
               return (
                 <div key={_index}>
                   <ListItem
