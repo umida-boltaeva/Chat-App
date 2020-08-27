@@ -73,7 +73,7 @@ class ChatListComponent extends React.Component {
                       }
                     ></ListItemText>
                   </ListItem>
-                  <Divider></Divider>
+                  <Divider />
                 </div>
               );
             })}
@@ -92,7 +92,7 @@ class ChatListComponent extends React.Component {
           >
             New Message
           </Button>
-          <List></List>
+          <List />
         </main>
       );
     }
