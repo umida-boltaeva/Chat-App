@@ -67,7 +67,10 @@ class DashboardComponent extends React.Component {
             chat={this.state.chats[this.state.selectedChat]}
           />
         )}
-        <ChatTextBoxComponent></ChatTextBoxComponent>
+        {this.state.selectedChat !== null && !this.state.newChatFormVisible ? (
+          <ChatTextBoxComponent />
+        ) : null}
+
         <Button className={classes.signOutBtn} onClick={this.signOut}>
           Sign Out
         </Button>
