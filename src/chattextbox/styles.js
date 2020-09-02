@@ -10,7 +10,7 @@ const styles = (theme) => ({
   chatTextBoxContainer: {
     position: "absolute",
     bottom: "15px",
-    left: "315px",
+    left: "335px",
     boxSizing: "border-box",
     overflow: "auto",
     width: "calc(100% - 300px - 50px)",

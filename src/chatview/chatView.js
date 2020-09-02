@@ -29,7 +29,7 @@ class ChatViewComponent extends React.Component {
                 <div
                   key={_index}
                   className={
-                    _msg.sender === user ? classes.friendSent : classes.userSent
+                    _msg.sender === user ? classes.userSent : classes.friendSent
                   }
                 >
                   {_msg.message}
