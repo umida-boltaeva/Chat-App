@@ -5,12 +5,29 @@ import styles from "./styles";
 import { withStyles } from "@material-ui/core/styles";
 
 class ChatTextBoxComponent extends React.Component {
-  submitMessage = () => console.log("Submit");
+  constructor() {
+    super();
+    this.state = {
+      chatText: "",
+    };
+  }
+
+  submitMessage = () => {
+    if (this.messageValid(this.state.chatText)) {
+      //call parent function
+      document.getElementById("chattextbox").value = "";
+    }
+  };
+
   userClickedInput = () => console.log("input clicked!");
 
-  userTyping = (e) => {
-    console.log("user is typing!");
-  };
+  userTyping = (e) =>
+    e.keyCode === 13
+      ? this.submitMessage()
+      : this.setState({ chatText: e.target.value });
+
+  messageValid = (text) => text && text.replace(/\s/g, "").length;
+
   render() {
     const { classes } = this.props;
 
