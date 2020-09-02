@@ -21,6 +21,18 @@ class DashboardComponent extends React.Component {
     this.setState({ selectedChat: chatIndex });
   };
 
+  submitMessage = (msg) => {
+    const docKey = this.buildDocKey(
+      this.state.chats[this.state.selectedChat].users.filter(
+        (usr) => usr !== this.state.email
+      )[0]
+    );
+    console.log(docKey);
+  };
+
+  //buildDocKey = (friend) => user1:user2
+  buildDocKey = (friend) => [this.state.email, friend].sort().join(":");
+
   newChatBtnClicked = () => {
     this.setState({ newChatFormVisible: true, selectedChat: null });
   };
@@ -68,7 +80,7 @@ class DashboardComponent extends React.Component {
           />
         )}
         {this.state.selectedChat !== null && !this.state.newChatFormVisible ? (
-          <ChatTextBoxComponent />
+          <ChatTextBoxComponent submitMessageFn={this.submitMessage} />
         ) : null}
 
         <Button className={classes.signOutBtn} onClick={this.signOut}>
