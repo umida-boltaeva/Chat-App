@@ -27,7 +27,18 @@ class DashboardComponent extends React.Component {
         (usr) => usr !== this.state.email
       )[0]
     );
-    console.log(docKey);
+    firebase
+      .firestore()
+      .collection("chats")
+      .doc(docKey)
+      .update({
+        messages: firebase.firestore.FieldValue.arrayUnion({
+          sender: this.state.email,
+          message: msg,
+          timeStamp: Date.now(),
+        }),
+        receiverHasRead: false,
+      });
   };
 
   //buildDocKey = (friend) => user1:user2
