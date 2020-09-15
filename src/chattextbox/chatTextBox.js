@@ -15,7 +15,7 @@ class ChatTextBoxComponent extends React.Component {
   submitMessage = () => {
     if (this.messageValid(this.state.chatText)) {
       this.props.submitMessageFn(this.state.chatText);
-      document.getElementById("chattextbox").value = "";
+      this.setState({ chatText: "" });
     }
   };
 
@@ -23,7 +23,8 @@ class ChatTextBoxComponent extends React.Component {
 
   userTyping = (e) =>
     e.keyCode === 13
-      ? this.submitMessage()
+      ? // 13 is the keyCode of Enter/Return button on keyboard
+        this.submitMessage()
       : this.setState({ chatText: e.target.value });
 
   messageValid = (text) => text && text.replace(/\s/g, "").length;
@@ -36,7 +37,6 @@ class ChatTextBoxComponent extends React.Component {
         <TextField
           placeholder="Type your message..."
           onKeyUp={(e) => this.userTyping(e)}
-          id="chattextbox"
           className={classes.chatTextBox}
           onFocus={this.userClickedInput}
         />
