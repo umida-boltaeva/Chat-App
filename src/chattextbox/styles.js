@@ -5,6 +5,9 @@ const styles = (theme) => ({
     "&:hover": {
       color: "gray",
     },
+    "&:focus": {
+      color: "gray",
+    },
   },
 
   chatTextBoxContainer: {
