@@ -38,11 +38,11 @@ const styles = (theme) => ({
   },
 
   chatHeader: {
-    width: "calc(100% - 301px)",
+    width: "calc(100% - 281px)",
     height: "50px",
     backgroundColor: "#344195",
     position: "fixed",
-    marginLeft: "301px",
+    marginLeft: "321px",
     fontSize: "18px",
     textAlign: "center",
     color: "white",
