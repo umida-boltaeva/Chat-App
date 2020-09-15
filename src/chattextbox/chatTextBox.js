@@ -28,6 +28,7 @@ class ChatTextBoxComponent extends React.Component {
       : this.setState({ chatText: e.target.value });
 
   messageValid = (text) => text && text.replace(/\s/g, "").length;
+  //This line is to check if the user is not sending an empty message.
 
   render() {
     const { classes } = this.props;
