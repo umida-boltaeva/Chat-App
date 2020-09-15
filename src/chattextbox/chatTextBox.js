@@ -37,6 +37,7 @@ class ChatTextBoxComponent extends React.Component {
         <TextField
           placeholder="Type your message..."
           onChange={this.userTyping}
+          value={this.state.chatText}
           className={classes.chatTextBox}
           onFocus={this.userClickedInput}
         />
